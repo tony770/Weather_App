@@ -15,15 +15,16 @@ body {
     height: 400px;
     width: 400px;
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 15% 80%;
 }
 
 form {
     display: flex;
     width: 100%;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 10px;
+
 }
 
 #searchBar {
@@ -37,13 +38,31 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .location {
-    margin-bottom: 10px;
     font-size: 30px;
+}
+
+.tempInfo, .weatherType {
+    font-size: 20px;
 }
 
 #weatherImg {
     width: 80px;
+}
+
+.weatherSubIcon {
+    width: 30px;
+}
+
+.weatherSubInfo {
+    display: flex;
+    gap: 40px;
+}
+
+.weatherSubInfoDiv {
+    display: flex;
+    flex-direction: column;
 }

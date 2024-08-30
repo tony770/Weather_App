@@ -15,15 +15,27 @@
         <div class="weatherInfo">
             <h2 class="location">Brooklyn</h2>
             <img src="./images/sunny.png" alt="" id="weatherImg">
-            <div>
+            <div class="tempInfo">
                 <span class="temp">24</span>
                 <span class="tempType">C</span>
             </div>
-            <span class="weather">Clear</span>
-            <div>
-                <span class="precipitation">Precipitation</span>
-                <span class="humidity">Humidity</span>
-                <span class="wind">Wind</span>
+            <span class="weatherType">Clear</span>
+            <div class="weatherSubInfo">
+                <div class="weatherSubInfoDiv">
+                    <img src="./images/rain.png" alt="" class="weatherSubIcon">
+                    <span class="precipitation">Precipitation</span>
+                    <span id="precipInfo">15%</span>
+                </div>
+                <div class="weatherSubInfoDiv">
+                    <img src="./images/humidity.png" alt="" class="weatherSubIcon">
+                    <span class="humidity">Humidity</span>
+                    <span id="humidInfo">78%</span>
+                </div>
+                <div class="weatherSubInfoDiv">
+                    <img src="./images/wind.png" alt="" class="weatherSubIcon">
+                    <span class="wind">Wind</span>
+                    <span windInfo>14 km/h</span>
+                </div>
             </div>
         </div>
     </div>
