@@ -3,7 +3,7 @@ const form = document.querySelector('form');
 const currlocation = document.querySelector('.location');
 const weatherImg = document.getElementById('weatherImg');
 const temperature = document.querySelector('.temp');
-const weatherType = document.querySelector('.weatherType');
+const weatherDescription = document.querySelector('.weatherDescription');
 const precipitationInfo = document.getElementById('precipInfo');
 const humidityInfo = document.getElementById('humidInfo');
 const windInfo = document.getElementById('windInfo');
@@ -20,7 +20,9 @@ async function searchWeather(searchLocation, date) {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${searchLocation}/${date}?key=NXEY4KJ8DDP6M5CV3PSP2WCNQ`, { mode: 'cors' });
         const data = await response.json();
         console.log(data);
-        temperature.textContent = data.days[0].temp;
+        updateLocationName(data);
+        updateWeatherTemp(data);
+        displayWeatherImage(data);
     }
     catch {
         console.error('Error fetching weather: ', error);
@@ -36,4 +38,52 @@ function getCurrentDate() {
     return (year + '-' + month + '-' + day)
 }
 
+const weatherCategory = {
+    'rainy': ['rain'],
+    'cloudy': ['fog', 'cloudy', 'partly-cloudy-day', 'partly-cloudy-night'],
+    'windy': ['wind'],
+    'sunny': ['clear-day', 'clear-night'],
+    'snowy': ['snow']
+};
+
+const weatherImage = {
+    'rainy': './images/rainy.png',
+    'cloudy': './images/cloudy.png',
+    'windy': './images/windy.png',
+    'sunny': './images/sunny.png',
+    'snowy': './images/snowy.png'
+}
+
+function getWeatherCategory(condition) {
+    for (const [category, conditions] of Object.entries(weatherCategory))
+    {
+        if(conditions.includes(condition))
+        {
+            return category;
+        }
+    }
+    console.log(`Condition not matched: ${condition}`);
+}
+
+function displayWeatherImage(data) {
+    const weatherCondition = data.days[0].icon;
+    console.log(weatherCondition);
+
+    const category = getWeatherCategory(weatherCondition);
+    const imgFile = weatherImage[category];
+
+    weatherImg.src = imgFile;
+}
+
+function updateLocationName(data) {
+    const newLocation = data.address;
+    currlocation.textContent = newLocation.charAt(0).toUpperCase() + newLocation.slice(1);
+}
+
+function updateWeatherTemp(data) {
+    temperature.textContent = data.days[0].temp;
+
+    const newDescription = data.days[0].icon
+    weatherDescription.textContent = newDescription.charAt(0).toUpperCase() + newDescription.slice(1);
+}
 //https://docs.google.com/spreadsheets/d/1cc-jQIap7ZToVaEgiXEk_Aa6YVYjSObLV9PMe4oHrFg/edit?gid=1769797687#gid=1769797687
